@@ -2,9 +2,9 @@
 
 ## Sobre Mim
 
-🎓 Estudante de **Ciências da Computação** | 💡 Apaixonado pelo mundo da **Tecnologia** | 🌎 Localizado em Recife - PE
-📚 Atualmetne aprendendo **JavaScript**.
-🎯 Objetivos: Me tornar um programador FullStack Developer.
+🎓 Estudante de **Ciências da Computação** | 💡 Apaixonado pelo mundo da **Tecnologia** | 🌎 Localizado em Recife - PE<br>
+📚 Atualmetne aprendendo **JavaScript**.<br>
+🎯 Objetivos: Me tornar um programador FullStack Developer.<br>
 🎮 No tempo livre, gosto de estudar e jogar.
 <!--
 **Jcjulio20060/Jcjulio20060** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
@@ -22,7 +22,7 @@ Here are some ideas to get you started:
 -->
 ---
 
-## ⚒️ Tecnolkogias e Ferramentas
+## ⚒️ Tecnologias e Ferramentas
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
@@ -30,8 +30,8 @@ Here are some ideas to get you started:
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
 </p>
 
-📌 Linguagens: Java, Python, JavaScript
-📌 Banco de Dados: MySQL
+📌 Linguagens: Java, Python, JavaScript<br>
+📌 Banco de Dados: MySQL<br>
 📌 Ferramentas: Git
 
 ---
@@ -44,10 +44,19 @@ Here are some ideas to get you started:
 
 ---
 
+## **📊 Estatísticas do GitHub**  
+
+<p align="center">
+<img src="https://github-readme-stats.vercel.app/api?username=Jcjulio20060&show_icons=true&theme=radical" height="180em" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Jcjulio20060&layout=compact&theme=radical" height="180em" />
+</p>  
+
+---
+
 ## **📬 Onde me encontrar ?**
 
-📧 **Email:** [juliocesarqueiroz20060@gmail.com](mailto:juliocesarqueiroz20060@gmail.com)
-💼 **Linkedin:** [Júlio César](https://www.linkedin.com/in/j%C3%BAlio-c%C3%A9sar-878678329/)
+📧 **Email:** [juliocesarqueiroz20060@gmail.com](mailto:juliocesarqueiroz20060@gmail.com)<br>
+💼 **Linkedin:** [Júlio César](https://www.linkedin.com/in/j%C3%BAlio-c%C3%A9sar-878678329/)<br>
 🐦 **Instagram:** [Jcjulio20060](https://www.instagram.com/jcjulio20060/)
 
 ---
