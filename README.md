@@ -3,7 +3,7 @@
 ## Sobre Mim
 
 🎓 Estudante de **Ciências da Computação** | 💡 Apaixonado pelo mundo da **Tecnologia** | 🌎 Localizado em Recife - PE<br>
-📚 Atualmetne aprendendo **JavaScript**.<br>
+📚 Atualmetne aprendendo **React Native**.<br>
 🎯 Objetivos: Me tornar um programador FullStack Developer.<br>
 🎮 No tempo livre, gosto de estudar e jogar.
 <!--
@@ -30,7 +30,7 @@ Here are some ideas to get you started:
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
 </p>
 
-📌 Linguagens: Java, Python, JavaScript<br>
+📌 Linguagens: Java, Python, HTML, CSS, JavaScript<br>
 📌 Banco de Dados: MySQL<br>
 📌 Ferramentas: Git
 
@@ -56,7 +56,7 @@ Here are some ideas to get you started:
 ## **📬 Onde me encontrar ?**
 
 📧 **Email:** [juliocesarqueiroz20060@gmail.com](mailto:juliocesarqueiroz20060@gmail.com)<br>
-💼 **Linkedin:** [Júlio César](https://www.linkedin.com/in/j%C3%BAlio-c%C3%A9sar-878678329/)<br>
+💼 **Linkedin:** [Júlio César](https://www.linkedin.com/in/Jcjulio20060/)<br>
 🐦 **Instagram:** [Jcjulio20060](https://www.instagram.com/jcjulio20060/)
 
 ---
