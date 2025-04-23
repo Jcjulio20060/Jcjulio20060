@@ -40,7 +40,7 @@ Here are some ideas to get you started:
 | 🚀 Projeto | Descrição | Tecnologia |
 |------|-----------|------------|
 | [📂 Projeto E-commerce](https://github.com/AndrezzaCoelho/Tropicalia_Flowers) | Um projeto de E-commerce feito para aprendizado | `html`, `css`, `js` |
-| [📂 Projeto de Filmes](https://github.com/Jcjulio20060/MovieStream) | Um site de filmes | `html`, `css`, `js` |
+| [📂 Projeto Mobile Coding](https://github.com/Jcjulio20060/SerBank) | Aplicativo de Banco para desenvolvimento e aprendizado | `React`, `React Native`, `JS` |
 
 ---
 
