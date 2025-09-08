@@ -58,8 +58,8 @@ Here are some ideas to get you started:
 # 📂 **Projetos em Destaque**
 | 🚀 Projeto | Descrição | Tecnologia |
 |------|-----------|------------|
-| [📂 E-commerce](https://github.com/AndrezzaCoelho/Tropicalia_Flowers) | Um projeto de E-commerce feito para aprendizado | `html`, `css`, `js` |
-| [📂 SerBank](https://github.com/Jcjulio20060/SerBank) | Aplicativo de Banco para desenvolvimento e aprendizado | `React`, `React Native`, `TS` |
+| [📂 E-commerce](https://github.com/AndrezzaCoelho/Tropicalia_Flowers) | Plataforma de vendas online de produtos de floricultura. O projeto inclui páginas de produtos e carrinho de compras, demonstrando habilidades em design responsivo e lógica de interação com JavaScript no front-end. | `html`, `css`, `js` |
+| [📂 SerBank](https://github.com/Jcjulio20060/SerBank) | Aplicativo de banco para gerenciamento de contas. O projeto simula funcionalidades como login, transações e extrato bancário, aplicando lógica de negócios com TypeScript e componentes reutilizáveis com React Native. | `React`, `React Native`, `TypeScript` |
 
 ---
 
