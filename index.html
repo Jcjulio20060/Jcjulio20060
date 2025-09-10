@@ -1,14 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome</title>
-        <link rel="shortcut icon" href="assets/Crown.ico" type="image/x-icon">
-        <link rel="stylesheet" href="css/index.css">
-    </head>
-    <body>
-        <h1 id="text-typing"></h1>
-    </body>
-    <script src="js/index.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Júlio César</title>
+    <link rel="shortcut icon" href="assets/Crown.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <script>
+      // Ativa o modo escuro conforme preferência do sistema
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow p-6 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <!-- Imagem de perfil -->
+            <img src="assets/photo.jpeg" alt="JC Photo" class="w-12 h-12 rounded-full border-2 border-blue-600 dark:border-blue-400 object-cover">
+            <h1 class="text-2xl font-bold">Júlio César</h1>
+        </div>
+        <nav>
+            <a href="#sobre" class="mx-2 hover:text-blue-600 dark:hover:text-blue-400">Sobre</a>
+            <a href="#projetos" class="mx-2 hover:text-blue-600 dark:hover:text-blue-400">Projetos</a>
+            <a href="#contato" class="mx-2 hover:text-blue-600 dark:hover:text-blue-400">Contato</a>
+            <!-- Botão modo claro/escuro -->
+            <button id="toggle-theme" class="ml-4 p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow flex flex-col items-center text-center">
+        <img src="assets/photo.jpeg" alt="JC Photo" class="w-32 h-32 rounded-full border-4 border-blue-600 dark:border-blue-400 object-cover mb-4">
+        <h2 class="text-3xl font-bold mb-2">Olá, eu sou Júlio César</h2>
+        <p class="mb-4">Desenvolvedor Fullstack | Estudante de Ciências da Computação</p>
+        <div class="flex gap-4 justify-center">
+            <a href="https://github.com/Jcjulio20060" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">GitHub</a>
+            <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">LinkedIn</a>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
+        <h2 class="text-xl font-semibold mb-2">Sobre Mim</h2>
+        <p>
+            Estudante de Ciências da Computação apaixonado por tecnologia, com
+            experiência prática em projetos pessoais e acadêmicos usando React,
+            React Native e Node.js. Busco atuar como Desenvolvedor Júnior ou
+            Estagiário, contribuindo com soluções criativas e aprendizado contínuo
+            para construir aplicações de alta qualidade.
+        </p>
+        <div class="mt-4">
+            <h3 class="font-semibold mb-1">Habilidades:</h3>
+            <ul class="flex flex-wrap gap-2">
+                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">HTML</li>
+                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">CSS</li>
+                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">JavaScript</li>
+                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">TypeScript</li>
+                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">React</li>
+                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">Node.js</li>
+                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">MySQL</li>
+                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">MongoDB</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos" class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
+    <h2 class="text-xl font-semibold mb-4">Projetos</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded shadow flex items-center gap-4">
+            <img src="assets/tropicalia-logo.png" alt="Logo tropicalia" class="w-16 h-16 object-contain rounded bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+            <div>
+                <h3 class="font-bold">Tropicália Flowers</h3>
+                <p class="mb-2">E-commerce especializado em flores tropicais, com catálogo dinâmico, carrinho de compras e integração de pagamentos.</p>
+                <div class="flex flex-wrap gap-2 mb-2">
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">React</span>
+                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Node.js</span>
+                    <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">MySQL</span>
+                </div>
+                <a href="https://github.com/Jcjulio20060/Tropicalia_Flowers" class="text-blue-600 dark:text-blue-400 hover:underline">Ver mais</a>
+            </div>
+        </div>
+        <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded shadow flex items-center gap-4">
+            <!-- Logo do projeto -->
+            <img src="assets/serbankLogo.png" alt="Logo SerBank" class="w-16 h-16 object-contain rounded bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+            <div>
+                <h3 class="font-bold">SerBank</h3>
+                <p class="mb-2">Aplicativo bancário moderno, com interface intuitiva e recursos essenciais para facilitar a gestão financeira do usuário.</p>
+                <div class="flex flex-wrap gap-2 mb-2">
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">React Native</span>
+                    <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Node.js</span>
+                </div>
+                <a href="https://github.com/Jcjulio20060/SerBank" class="text-blue-600 dark:text-blue-400 hover:underline">Ver mais</a>
+            </div>
+        </div>
+        <!-- Adicione mais projetos seguindo o mesmo padrão -->
+    </div>
+</section>
+
+    <!-- Contato -->
+    <section id="contato" class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow mb-10">
+        <h2 class="text-xl font-semibold mb-2">Contato</h2>
+        <form class="flex flex-col gap-4">
+            <input type="text" placeholder="Seu nome" class="border p-2 rounded dark:bg-gray-900 dark:border-gray-700" required>
+            <input type="email" placeholder="Seu e-mail" class="border p-2 rounded dark:bg-gray-900 dark:border-gray-700" required>
+            <textarea placeholder="Sua mensagem" class="border p-2 rounded dark:bg-gray-900 dark:border-gray-700" required></textarea>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 bg-white dark:bg-gray-800 border-t dark:border-gray-700">
+        <span>&copy; 2025 Júlio César. Todos os direitos reservados.</span>
+    </footer>
+
+    <script>
+      // Alternância manual do modo claro/escuro
+      const btn = document.getElementById('toggle-theme');
+      const icon = document.getElementById('theme-icon');
+      btn.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        if(document.documentElement.classList.contains('dark')) {
+          localStorage.theme = 'dark';
+          icon.textContent = '☀️';
+        } else {
+          localStorage.theme = 'light';
+          icon.textContent = '🌙';
+        }
+      });
+      // Ajusta o ícone ao carregar
+      if(document.documentElement.classList.contains('dark')) {
+        icon.textContent = '☀️';
+      } else {
+        icon.textContent = '🌙';
+      }
+    </script>
+</body>
 </html>
