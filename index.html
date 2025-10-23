@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1E40AF">
     <title>Portfólio | Júlio César</title>
     <link rel="shortcut icon" href="assets/Crown.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -57,11 +58,7 @@
     <section id="sobre" class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
         <h2 class="text-xl font-semibold mb-2">Sobre Mim</h2>
         <p>
-            Estudante de Ciências da Computação apaixonado por tecnologia, com
-            experiência prática em projetos pessoais e acadêmicos usando React,
-            React Native e Node.js. Busco atuar como Desenvolvedor Júnior ou
-            Estagiário, contribuindo com soluções criativas e aprendizado contínuo
-            para construir aplicações de alta qualidade.
+            Sou estudante de Ciência da Computação apaixonado por criar soluções que unem lógica e criatividade. Tenho experiência com React, React Native e Node.js, e gosto de transformar ideias em projetos reais. Estou sempre em busca de desafios que me façam evoluir como desenvolvedor e como pessoa.
         </p>
         <div class="mt-4">
             <h3 class="font-semibold mb-1">Habilidades:</h3>
@@ -76,6 +73,16 @@
                 <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">MongoDB</li>
             </ul>
         </div>
+    </section>
+
+    <section id="extras" class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
+        <h2 class="text-xl font-semibold mb-2">Diferenciais</h2>
+        <ul class="list-disc list-inside space-y-1">
+            <li>Experiência com integração entre front-end e back-end</li>
+            <li>Interesse por inovação e projetos com impacto social</li>
+            <li>Facilidade para aprender novas tecnologias</li>
+            <li>Bom humor e espírito de equipe (ninguém quer bug no código e no clima 😄)</li>
+        </ul>
     </section>
 
     <!-- Projetos -->
@@ -113,14 +120,38 @@
 </section>
 
     <!-- Contato -->
-    <section id="contato" class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow mb-10">
-        <h2 class="text-xl font-semibold mb-2">Contato</h2>
-        <form class="flex flex-col gap-4">
-            <input type="text" placeholder="Seu nome" class="border p-2 rounded dark:bg-gray-900 dark:border-gray-700" required>
-            <input type="email" placeholder="Seu e-mail" class="border p-2 rounded dark:bg-gray-900 dark:border-gray-700" required>
-            <textarea placeholder="Sua mensagem" class="border p-2 rounded dark:bg-gray-900 dark:border-gray-700" required></textarea>
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">Enviar</button>
-        </form>
+    <section id="contato" class="max-w-3xl mx-auto mt-10 p-6 rounded shadow bg-white dark:bg-gray-800 text-center">
+        <!-- PC - QRCode + Chamada -->
+        <div class="hidden lg:flex flex-col items-center justify-center text-white bg-gradient-to-r from-blue-600 to-blue-400 p-10 rounded-lg">
+            <h2 class="text-2xl font-bold mb-3">Vamos criar algo juntos?</h2>
+            <p class="mb-5">Aberto a colaborações, estágios e boas ideias 💡</p>
+            <img src="assets/qr-linkedin.png" alt="QR Code LinkedIn" class="w-32 h-32 mb-5 border-2 border-white rounded-lg">
+            <div class="flex justify-center gap-4">
+            <a href="mailto:juliocesarqueiroz20060@gmail.com@gmail.com" class="bg-white text-blue-600 px-4 py-2 rounded font-medium hover:bg-gray-100">Entrar em contato</a>
+            <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="border border-white px-4 py-2 rounded font-medium hover:bg-white hover:text-blue-600">LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- TABLET - Apenas “Vamos criar algo juntos?” -->
+        <div class="hidden md:block lg:hidden text-white bg-gradient-to-r from-blue-600 to-blue-400 p-10 rounded-lg">
+            <h2 class="text-2xl font-bold mb-3">Vamos criar algo juntos?</h2>
+            <p class="mb-5">Aberto a colaborações e boas ideias 💡</p>
+            <div class="flex justify-center gap-4">
+            <a href="mailto:juliocesarqueiroz20060@gmail.com@gmail.com" class="bg-white text-blue-600 px-4 py-2 rounded font-medium hover:bg-gray-100">Entrar em contato</a>
+            <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="border border-white px-4 py-2 rounded font-medium hover:bg-white hover:text-blue-600">LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- MOBILE - Central de Contatos simples -->
+        <div class="block md:hidden mt-4">
+            <h2 class="text-xl font-semibold mb-3">Vamos Conversar?</h2>
+            <p class="mb-4 text-gray-700 dark:text-gray-300">Me chama onde for mais fácil pra você 🚀</p>
+            <div class="flex justify-center gap-6 text-2xl">
+            <a href="mailto:juliocesarqueiroz20060@gmail.com@gmail.com" class="hover:text-blue-600">📧</a>
+            <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="hover:text-blue-600">💼</a>
+            <a href="https://github.com/Jcjulio20060" target="_blank" class="hover:text-blue-600">💻</a>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
