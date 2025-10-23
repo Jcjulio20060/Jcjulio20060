@@ -26,21 +26,46 @@
 </head>
 <body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
     <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 shadow p-6 flex justify-between items-center">
+    <header class="bg-white dark:bg-gray-800 shadow p-4 md:p-6">
+      <div class="max-w-3xl mx-auto flex items-center justify-between">
         <div class="flex items-center gap-4">
-            <!-- Imagem de perfil -->
-            <img src="assets/photo.jpeg" alt="JC Photo" class="w-12 h-12 rounded-full border-2 border-blue-600 dark:border-blue-400 object-cover">
-            <h1 class="text-2xl font-bold">Júlio César</h1>
+          <!-- Imagem de perfil -->
+          <img src="assets/photo.jpeg" alt="JC Photo" class="w-12 h-12 rounded-full border-2 border-blue-600 dark:border-blue-400 object-cover">
+          <div class="leading-none">
+            <h1 class="text-lg md:text-2xl font-bold">Júlio César</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">Desenvolvedor Fullstack</p>
+          </div>
         </div>
-        <nav>
+
+        <div class="flex items-center gap-3">
+          <!-- Nav para desktop -->
+          <nav class="hidden md:flex items-center gap-4">
             <a href="#sobre" class="mx-2 hover:text-blue-600 dark:hover:text-blue-400">Sobre</a>
             <a href="#projetos" class="mx-2 hover:text-blue-600 dark:hover:text-blue-400">Projetos</a>
             <a href="#contato" class="mx-2 hover:text-blue-600 dark:hover:text-blue-400">Contato</a>
-            <!-- Botão modo claro/escuro -->
-            <button id="toggle-theme" class="ml-4 p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                <span id="theme-icon">🌙</span>
-            </button>
+          </nav>
+
+          <!-- Botão modo claro/escuro -->
+          <button id="toggle-theme" class="ml-2 p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition" aria-label="Alternar tema">
+            <span id="theme-icon">🌙</span>
+          </button>
+
+          <!-- Botão menu mobile -->
+          <button id="menu-btn" class="md:hidden ml-2 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition" aria-label="Abrir menu" aria-expanded="false">
+            <span id="menu-icon" class="text-xl">☰</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Menu mobile (visível quando clicado) -->
+      <div id="mobile-menu" class="md:hidden hidden mt-3">
+        <nav class="flex flex-col gap-2 p-4 rounded-b bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700">
+          <a href="#sobre" class="block px-2 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">Sobre</a>
+          <a href="#projetos" class="block px-2 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">Projetos</a>
+          <a href="#contato" class="block px-2 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">Contato</a>
+          <a href="https://github.com/Jcjulio20060" target="_blank" class="block px-2 py-2 rounded text-blue-600 dark:text-blue-400 hover:underline">GitHub</a>
         </nav>
+      </div>
     </header>
 
     <!-- Hero -->
@@ -179,6 +204,18 @@
       } else {
         icon.textContent = '🌙';
       }
+
+      // Lógica do menu mobile
+      const menuBtn = document.getElementById('menu-btn');
+      const menuIcon = document.getElementById('menu-icon');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        // aria-expanded para acessibilidade
+        menuBtn.setAttribute('aria-expanded', String(!isHidden));
+        // troca ícone entre ☰ e ✕ 
+        menuIcon.textContent = isHidden ? '☰' : '✕';
+      });
     </script>
 </body>
 </html>
