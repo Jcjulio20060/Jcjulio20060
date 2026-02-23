@@ -4,7 +4,7 @@
 
 - **Whatsapp:** (81) 99804-7104
 - **Email:** juliocesarqueiroz20080@gmail.com
-- **Cidade:** Cordeiro - Recife/PE
+- **Cidade:** Recife/PE
 - **Data de Nascimento:** 27/08/2005
 
 ---

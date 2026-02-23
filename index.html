@@ -24,351 +24,1188 @@
       }
     </script>
     <style>
+        :root {
+            --primary: #1D4ED8;
+            --secondary: #2563EB;
+            --accent: #3B82F6;
+            --bg: #F8FAFC;
+            --text-heading: #0F172A;
+            --text-body: #374151;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --sidebar-width: 280px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --primary: #1D4ED8;
+            --secondary: #2563EB;
+            --accent: #3B82F6;
+            --bg: #0F172A;
+            --text-heading: #F1F5F9;
+            --text-body: #CBD5E1;
+            --card-bg: rgba(15, 23, 42, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         html {
             scroll-behavior: smooth;
         }
+
+        body {
+            display: flex;
+            background: var(--bg);
+            color: var(--text-body);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-heading);
+            font-weight: 700;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--primary);
+            color: white;
+            position: fixed;
+            padding: 40px 0 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+            z-index: 2005;
+            transition: var(--transition);
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 16px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 12px 16px;
+            margin: 4px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .sidebar a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+
+        .sidebar a.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-footer {
+            padding: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .sidebar-footer p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.6;
+        }
+
+        /* Main */
+        .main {
+            margin-left: var(--sidebar-width);
+            padding: 60px 100px 40px;
+            max-width: 1200px;
+            width: calc(100% - var(--sidebar-width));
+            flex: 1;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h1 {
+            font-size: 2.25rem;
+            margin-bottom: 32px;
+            letter-spacing: -0.03em;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 32px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hero Style for 'Sobre' */
+        .hero-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--text-body);
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 32px;
+            padding-top: 0;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cv-container {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cv-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1.5px solid var(--primary);
+        }
+
+        .cv-btn-pt {
+            background: var(--primary);
+            color: white;
+        }
+
+        .cv-btn-pt:hover {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .cv-btn-en {
+            background: transparent;
+            color: var(--primary);
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Timeline */
+        .timeline {
+            border-left: 2px solid var(--accent);
+            padding-left: 32px;
+            margin-left: 8px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -42px;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+        }
+
+        .timeline-item strong {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-heading);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .date {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Skills Chips */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: block;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-body);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Accordion */
+        .accordion-item {
+            cursor: pointer;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: var(--secondary);
+        }
+
+        .accordion-item.open .accordion-header i {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+            margin-top: 0;
+            opacity: 0;
+        }
+
+        .accordion-item.open .accordion-content {
+            max-height: 2000px;
+            transition: max-height 0.4s cubic-bezier(1, 0, 1, 0);
+            margin-top: 24px;
+            opacity: 1;
+        }
+
+        .project-media-placeholder {
+            width: 100%;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.03);
+            border: 2px dashed rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: 16px;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive */
+
+        /* Mobile Header */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 2000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .theme-toggle-btn:active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 1024px) {
+            .mobile-header {
+                display: flex;
+            }
+
+            .sidebar {
+                left: -100% !important;
+                visibility: hidden;
+            }
+
+            body.menu-open .sidebar {
+                left: 0 !important;
+                visibility: visible;
+            }
+
+            body.menu-open .sidebar-overlay {
+                display: block;
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .sidebar-overlay {
+                display: none;
+                pointer-events: none;
+            }
+
+            .main {
+                margin-left: 0 !important;
+                width: 100% !important;
+                padding: 60px 24px 40px !important;
+                margin-top: 30px;
+                display: block;
+                position: relative;
+                top: 0;
+            }
+
+            .section {
+                display: block !important;
+                margin-bottom: 40px;
+                opacity: 1 !important;
+                visibility: visible !important;
+                width: 100%;
+                padding-top: 0;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 24px;
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+
+            .profile-header div {
+                margin-top: 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Contact & Footer Styles */
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+            background: var(--primary);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        }
+
+        .social-button:hover {
+            transform: translateY(-2px);
+            background: var(--secondary);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .social-button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .fixed-footer {
+            display: none !important;
+        }
+
+        /* Dark mode adjustments */
+        .dark .skill-tag {
+            background: var(--card-bg);
+            color: var(--text-body);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dark .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .dark .project-media-placeholder {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.05);
+            color: var(--accent);
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
-    <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 shadow p-4 md:p-6">
-      <div class="max-w-3xl mx-auto flex items-center justify-between">
-        <div class="flex items-center gap-4">
-          <!-- Imagem de perfil -->
-          <img src="assets/photo.jpeg" alt="JC Photo" class="w-12 h-12 rounded-full border-2 border-blue-600 dark:border-blue-400 object-cover">
-          <div class="leading-none">
-            <h1 class="text-lg md:text-2xl font-bold">Júlio César</h1>
-            <p class="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">Desenvolvedor Fullstack</p>
-          </div>
-        </div>
+<body>
 
-        <div class="flex items-center gap-3">
-          <!-- Nav para desktop -->
-          <nav class="hidden md:flex items-center gap-4">
-            <a href="#sobre" class="mx-2 hover:text-blue-600 dark:hover:text-blue-400">Sobre</a>
-            <a href="#projetos" class="mx-2 hover:text-blue-600 dark:hover:text-blue-400">Projetos</a>
-            <a href="#contato" class="mx-2 hover:text-blue-600 dark:hover:text-blue-400">Contato</a>
-          </nav>
-
-          <!-- Botão modo claro/escuro -->
-          <button id="toggle-theme" class="ml-2 p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition" aria-label="Alternar tema">
-            <span id="theme-icon">🌙</span>
-          </button>
-
-          <!-- Botão menu mobile -->
-          <button id="menu-btn" class="md:hidden ml-2 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition" aria-label="Abrir menu" aria-expanded="false">
-            <span id="menu-icon" class="text-xl">☰</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Menu mobile (visível quando clicado) -->
-      <div id="mobile-menu" class="md:hidden hidden mt-3">
-        <nav class="flex flex-col gap-2 p-4 rounded-b bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700">
-          <a href="#sobre" class="block px-2 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">Sobre</a>
-          <a href="#projetos" class="block px-2 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">Projetos</a>
-          <a href="#contato" class="block px-2 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">Contato</a>
-          <a href="https://github.com/Jcjulio20060" target="_blank" class="block px-2 py-2 rounded text-blue-600 dark:text-blue-400 hover:underline">GitHub</a>
-        </nav>
-      </div>
+    <header class="mobile-header">
+        <button class="menu-toggle" aria-label="Abrir Menu" onclick="toggleMenu()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <span class="mobile-logo">Júlio César</span>
+        <button id="mobile-theme-toggle" class="theme-toggle-btn" aria-label="Alternar Tema" onclick="toggleTheme()">
+            <span id="mobile-theme-icon">🌙</span>
+        </button>
     </header>
 
-    <!-- Hero -->
-    <section class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow flex flex-col items-center text-center">
-        <img src="assets/photo.jpeg" alt="JC Photo" class="w-32 h-32 rounded-full border-4 border-blue-600 dark:border-blue-400 object-cover mb-4">
-        <h2 class="text-3xl font-bold mb-2">Olá, eu sou Júlio César</h2>
-        <p class="mb-4">Desenvolvedor Fullstack | Estudante de Ciências da Computação</p>
-        <div class="flex gap-4 justify-center">
-            <a href="https://github.com/Jcjulio20060" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">GitHub</a>
-            <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">LinkedIn</a>
-        </div>
-    </section>
+    <div class="sidebar-overlay" onclick="toggleMenu()"></div>
 
-    <!-- Sobre -->
-    <section id="sobre" class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
-        <h2 class="text-xl font-semibold mb-2">Sobre Mim</h2>
-        <p>
-            Sou estudante de Ciência da Computação apaixonado por criar soluções que unem lógica e criatividade. Tenho experiência com React, React Native e Node.js, e gosto de transformar ideias em projetos reais. Estou sempre em busca de desafios que me façam evoluir como desenvolvedor e como pessoa.
-        </p>
-        <div class="mt-4">
-            <h3 class="font-semibold mb-1">Habilidades:</h3>
-            <ul class="flex flex-wrap gap-2">
-                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">HTML</li>
-                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">CSS</li>
-                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">JavaScript</li>
-                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">TypeScript</li>
-                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">React</li>
-                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">Node.js</li>
-                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">MySQL</li>
-                <li class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">MongoDB</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="extras" class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
-        <h2 class="text-xl font-semibold mb-2">Diferenciais</h2>
-        <ul class="list-disc list-inside space-y-1">
-            <li>Experiência com integração entre front-end e back-end</li>
-            <li>Interesse por inovação e projetos com impacto social</li>
-            <li>Facilidade para aprender novas tecnologias</li>
-            <li>Bom humor e espírito de equipe (ninguém quer bug no código e no clima 😄)</li>
-        </ul>
-    </section>
-
-    <!-- Projetos -->
-    <section id="projetos" class="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
-      <h2 class="text-xl font-semibold mb-4">Projetos</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- card com data-attributes -->
-        <article class="project-card bg-gray-50 dark:bg-gray-900 p-4 rounded shadow flex items-center gap-4 cursor-pointer"
-                 data-title="Tropicália Flowers"
-                 data-desc="E-commerce especializado em flores tropicais, catálogo dinâmico, carrinho e pagamentos."
-                 data-tech="React,Node.js,MySQL"
-                 data-image="assets/tropicalia-logo.png"
-                 data-repo="https://github.com/Jcjulio20060/Tropicalia_Flowers"
-                 role="button" tabindex="0">
-          <img src="assets/tropicalia-logo.png" alt="Tropicália Flowers" class="w-16 h-16 object-contain rounded bg-white dark:bg-gray-800 border">
-          <div>
-            <h3 class="font-bold">Tropicália Flowers</h3>
-            <p class="mb-2 text-sm text-gray-600 dark:text-gray-300">E-commerce com catálogo dinâmico e integração de pagamentos.</p>
-            <div class="flex flex-wrap gap-2 mb-2">
-              <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">React</span>
-              <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Node.js</span>
-              <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">MySQL</span>
-            </div>
-            <span class="text-blue-600 dark:text-blue-400 hover:underline text-sm">Ver mais</span>
-          </div>
-        </article>
-
-        <article class="project-card bg-gray-50 dark:bg-gray-900 p-4 rounded shadow flex items-center gap-4 cursor-pointer"
-                 data-title="SerBank"
-                 data-desc="Aplicativo bancário moderno com interface intuitiva e recursos essenciais."
-                 data-tech="React Native,Node.js"
-                 data-image="assets/serbankLogo.png"
-                 data-repo="https://github.com/Jcjulio20060/SerBank"
-                 role="button" tabindex="0">
-          <img src="assets/serbankLogo.png" alt="SerBank" class="w-16 h-16 object-contain rounded bg-white dark:bg-gray-800 border">
-          <div>
-            <h3 class="font-bold">SerBank</h3>
-            <p class="mb-2 text-sm text-gray-600 dark:text-gray-300">App bancário com UI intuitiva e recursos essenciais.</p>
-            <div class="flex flex-wrap gap-2 mb-2">
-              <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">React Native</span>
-              <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Node.js</span>
-            </div>
-            <span class="text-blue-600 dark:text-blue-400 hover:underline text-sm">Ver mais</span>
-          </div>
-        </article>
-
-        <!-- Adicione mais project-card seguindo o mesmo padrão -->
-      </div>
-    </section>
-
-    <!-- Modal (começa escondido) -->
-    <div id="project-modal" class="fixed flex inset-0 z-40 hidden items-center justify-center p-4">
-      <div id="modal-backdrop" class="absolute inset-0 bg-black/50"></div>
-      <div class="relative z-50 max-w-3xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-        <div class="flex justify-between items-start p-4 border-b dark:border-gray-700">
-          <h3 id="modal-title" class="text-lg font-bold"></h3>
-          <button id="modal-close" class="text-gray-600 dark:text-gray-300 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700">✕</button>
-        </div>
-        <div class="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="md:col-span-1">
-            <img id="modal-image" src="" alt="" class="w-full h-40 object-cover rounded" loading="lazy">
-          </div>
-          <div class="md:col-span-2">
-            <p id="modal-desc" class="text-sm text-gray-700 dark:text-gray-200 mb-3"></p>
-            <div id="modal-tech" class="flex flex-wrap gap-2 mb-4"></div>
-            <div class="flex gap-3">
-              <div class="flex gap-3">
-                <a id="modal-repo" href="#" target="_blank" 
-                   class="group relative flex items-center overflow-hidden bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded transition-all duration-300 hover:px-4"
-                   style="width: 40px; height: 40px;">
-                    <!-- GitHub Icon -->
-                    <svg class="w-5 h-5 mx-auto transition-transform group-hover:ml-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                    </svg>
-                    <!-- Texto que aparece no hover -->
-                    <span class="whitespace-nowrap pl-2 pr-1 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      Acessar código
-                    </span>
-                </a>
-                <a id="modal-demo" href="#" target="_blank" class="px-3 py-2 border rounded text-sm hidden">Demo</a>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="flex items-center gap-3">
+                <img src="assets/photo.jpeg" alt="JC Photo" class="w-10 h-10 rounded-full border-2 border-white object-cover">
+                <div class="flex flex-col">
+                    <h2 class="text-sm font-bold leading-tight">Júlio César</h2>
+                    <p class="text-xs text-white/70 font-medium uppercase tracking-wider leading-tight"
+                        data-i18n="sidebar_subtitle">
+                        Desenvolvedor Fullstack</p>
                 </div>
-              <a id="modal-demo" href="#" target="_blank" class="px-3 py-2 border rounded text-sm hidden">Demo</a>
             </div>
-          </div>
         </div>
-      </div>
+
+        <nav class="sidebar-nav">
+            <a class="menu active" onclick="showSection('sobre')" data-i18n="menu_about">👤 Sobre</a>
+            <a class="menu" onclick="showSection('experiencia')" data-i18n="menu_experience">💼 Experiência</a>
+            <a class="menu" onclick="showSection('academico')" data-i18n="menu_academic">🎓 Acadêmico</a>
+            <a class="menu" onclick="showSection('projetos-academicos')" data-i18n="menu_academic_projects">📚 Projetos Acadêmicos</a>
+            <a class="menu" onclick="showSection('participacoes-projetos')" data-i18n="menu_projects">🚀 Participações & Projetos</a>
+            <a class="menu" onclick="showSection('hard-skills')" data-i18n="menu_skills">🛠️ Hard Skills</a>
+            <a class="menu" onclick="showSection('contato')" data-i18n="menu_contact">📞 Contato</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>
+                &copy; <span id="current-year"></span> Júlio César.<br>
+                <span data-i18n="footer_rights">Todos os direitos reservados.</span>
+            </p>
+        </div>
     </div>
 
-    <!-- Contato -->
-    <section id="contato" class="max-w-3xl mx-auto mt-10 p-6 rounded shadow bg-white dark:bg-gray-800 text-center">
-        <!-- PC - QRCode + Chamada -->
-        <div class="hidden lg:flex flex-col items-center justify-center text-white bg-gradient-to-r from-blue-600 to-blue-400 p-10 rounded-lg">
-            <h2 class="text-2xl font-bold mb-3">Vamos criar algo juntos?</h2>
-            <p class="mb-5">Aberto a colaborações, estágios e boas ideias 💡</p>
-            <img src="assets/qr-linkedin.png" alt="QR Code LinkedIn" class="w-32 h-32 mb-5 border-2 border-white rounded-lg">
-            <div class="flex justify-center gap-4">
-            <a href="mailto:juliocesarqueiroz20060@gmail.com@gmail.com" class="bg-white text-blue-600 px-4 py-2 rounded font-medium hover:bg-gray-100">Entrar em contato</a>
-            <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="border border-white px-4 py-2 rounded font-medium hover:bg-white hover:text-blue-600">LinkedIn</a>
+    <div class="main">
+        <!-- Floating Language Selector (opcional, pode remover se não quiser) -->
+        <div class="lang-selector-container" style="display: none;">
+            <select id="lang-select" onchange="setLanguage(this.value)">
+                <option value="pt">PT-BR</option>
+                <option value="en">EN-US</option>
+            </select>
+        </div>
+
+        <!-- SOBRE -->
+        <div id="sobre" class="section active">
+            <div class="profile-header">
+                <img src="assets/photo.jpeg" alt="JC Photo" class="profile-img">
+                <div>
+                    <h1>Júlio César</h1>
+                    <p style="font-size: 1.1rem; color: var(--secondary); font-weight: 600;" data-i18n="hero_title">
+                        Desenvolvedor Fullstack | Estudante de Ciências da Computação</p>
+                    <div class="cv-container">
+                        <a href="https://github.com/Jcjulio20060" target="_blank" class="cv-btn cv-btn-pt">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            <span>Ver GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="cv-btn cv-btn-pt">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                            <span>Ver LinkedIn</span>
+                        </a>
+                        <a href="assets/Currículo Moderno - Júlio César.pdf" download="CV_Julio_Cesar.pdf" class="cv-btn cv-btn-pt">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <span>Baixar CV</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card hero-text">
+                <span class="skill-category" style="margin-bottom: 16px; display: block;"
+                    data-i18n="summary_label">Resumo Profissional</span>
+                <span data-i18n="summary_content">
+                    Sou estudante de Ciência da Computação apaixonado por criar soluções que unem lógica e criatividade. Tenho experiência com React, React Native e Node.js, e gosto de transformar ideias em projetos reais. Estou sempre em busca de desafios que me façam evoluir como desenvolvedor e como pessoa.
+                </span>
             </div>
         </div>
 
-        <!-- TABLET - Apenas “Vamos criar algo juntos?” -->
-        <div class="hidden md:block lg:hidden text-white bg-gradient-to-r from-blue-600 to-blue-400 p-10 rounded-lg">
-            <h2 class="text-2xl font-bold mb-3">Vamos criar algo juntos?</h2>
-            <p class="mb-5">Aberto a colaborações e boas ideias 💡</p>
-            <div class="flex justify-center gap-4">
-            <a href="mailto:juliocesarqueiroz20060@gmail.com@gmail.com" class="bg-white text-blue-600 px-4 py-2 rounded font-medium hover:bg-gray-100">Entrar em contato</a>
-            <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="border border-white px-4 py-2 rounded font-medium hover:bg-white hover:text-blue-600">LinkedIn</a>
+        <!-- EXPERIÊNCIA -->
+        <div id="experiencia" class="section">
+            <h1 data-i18n="exp_h1">Experiência Profissional</h1>
+
+            <div class="timeline">
+              
+                <div class="timeline-item card">
+                    <span class="date">Outubro 2025 - <span data-i18n="date_present">o momento</span></span>
+                    <strong>Estágio em Suporte Técnico</strong>
+                    <em>Zappcom</em>
+                    <p style="margin-top: 12px;" data-i18n="exp_zappcom_desc">
+                        Manutenção e suporte técnico em equipamentos de informática. Configuração de servidores para Intranet e provedores. Suporte aos usuários e atendimento ao cliente. Elaboração de relatórios e análise de tecnologias. Monitoramento de redes e análise de segurança. Edição de áudio, vídeo e fotografias digitais. Desenvolvimento e instalação de soluções de segurança. Apoio em serviços de vídeo conferência.
+                    </p>
+                </div>
+
+                <div class="timeline-item card">
+                  <span class="date">Outubro 2022 - Outubro 2025</span>
+                  <strong>Assistente Administrativo</strong>
+                  <em>Clínica Plenitude Multidisciplinar</em>
+                  <p style="margin-top: 12px;" data-i18n="exp_clinica_desc">
+                      Otimização de processos administrativos através da organização de dados em planilhas. Resolução de problemas de TI, prestando suporte técnico aos sistemas.
+                  </p>
+                </div>
+
             </div>
         </div>
 
-        <!-- MOBILE - Central de Contatos simples -->
-        <div class="block md:hidden mt-4">
-            <h2 class="text-xl font-semibold mb-3">Vamos Conversar?</h2>
-            <p class="mb-4 text-gray-700 dark:text-gray-300">Me chama onde for mais fácil pra você 🚀</p>
-            <div class="flex justify-center gap-6 text-2xl">
-            <a href="mailto:juliocesarqueiroz20060@gmail.com@gmail.com" class="hover:text-blue-600">📧</a>
-            <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="hover:text-blue-600">💼</a>
-            <a href="https://github.com/Jcjulio20060" target="_blank" class="hover:text-blue-600">💻</a>
+        <!-- ACADÊMICO -->
+        <div id="academico" class="section">
+            <h1 data-i18n="acad_h1">Histórico Acadêmico</h1>
+
+            <div class="card">
+                <span class="date">Janeiro 2024 - Dezembro 2027</span>
+                <strong data-i18n="acad_ciencia_title">Bacharelado em Ciências da Computação</strong>
+                <span>Universidade Maurício de Nassau - Cursando</span>
+            </div>
+
+            <div class="card">
+                <span class="date">Outubro 2022 - Fevereiro 2024</span>
+                <strong data-i18n="acad_sistema_title">Análise de Desenvolvimento de Sistema & TI</strong>
+                <span>Prepara Cursos Profissionalizantes - Concluído</span>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="text-center py-4 bg-white dark:bg-gray-800 border-t dark:border-gray-700">
-        <span>&copy; 2025 Júlio César. Todos os direitos reservados.</span>
-    </footer>
+        <!-- PROJETOS ACADÊMICOS -->
+        <div id="projetos-academicos" class="section">
+            <h1 data-i18n="acad_proj_h1">Projetos Acadêmicos</h1>
+
+            <div class="card">
+                <span class="skill-category" data-i18n="acad_proj_label">Projetos em Desenvolvimento</span>
+                <p style="font-size: 0.95rem;" data-i18n="acad_proj_desc">
+                    Em breve mais projetos acadêmicos serão adicionados aqui!
+                </p>
+            </div>
+        </div>
+
+        <!-- PROJETOS -->
+        <div id="participacoes-projetos" class="section">
+            <h1 data-i18n="proj_h1">Participações & Projetos</h1>
+
+            <div class="card accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <div>
+                        <span class="skill-category" data-i18n="label_personal">Projetos Pessoais</span>
+                        <strong>SerBank</strong>
+                    </div>
+                    <i class="arrow">▼</i>
+                </div>
+                <div class="accordion-content">
+                    <p style="font-size: 0.95rem;" data-i18n="proj_serbank_desc">
+                        Aplicativo bancário moderno com interface intuitiva e recursos essenciais para gerenciamento de contas.
+                    </p>
+                    <div style="margin-top: 16px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px;">
+                        <strong style="font-size: 0.9rem; color: var(--primary);" data-i18n="proj_tech">Tecnologias</strong>
+                        <p style="font-size: 0.9rem; color: var(--text-body); margin-top: 8px;">
+                            React Native, Node.js
+                        </p>
+                        <div class="project-media-placeholder">
+                            <span>[Espaço para Imagens do Projeto]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card accordion-item" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
+                    <div>
+                        <span class="skill-category" data-i18n="label_personal">Projetos Pessoais</span>
+                        <strong>Tropicália Flowers</strong>
+                    </div>
+                    <i class="arrow">▼</i>
+                </div>
+                <div class="accordion-content">
+                    <p style="font-size: 0.95rem;" data-i18n="proj_tropicalia_desc">
+                        E-commerce especializado em flores tropicais, catálogo dinâmico, carrinho e pagamentos integrados.
+                    </p>
+                    <div style="margin-top: 16px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px;">
+                        <strong style="font-size: 0.9rem; color: var(--primary);" data-i18n="proj_tech">Tecnologias</strong>
+                        <p style="font-size: 0.9rem; color: var(--text-body); margin-top: 8px;">
+                            React, Node.js, MySQL
+                        </p>
+                        <div class="project-media-placeholder">
+                            <span>[Espaço para Imagens do Projeto]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div id="hard-skills" class="section">
+            <h1 data-i18n="menu_skills">Hard Skills</h1>
+
+            <div class="skills-grid">
+                <div class="card">
+                    <span class="skill-category" data-i18n="skills_frontend">Front-end</span>
+                    <div class="skill-tag-container">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">TypeScript</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="skill-category" data-i18n="skills_backend">Back-end</span>
+                    <div class="skill-tag-container">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="skill-category" data-i18n="skills_tools">Ferramentas</span>
+                    <div class="skill-tag-container">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Figma</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="skill-category" data-i18n="skills_soft">Soft Skills</span>
+                    <div class="skill-tag-container">
+                        <span class="skill-tag">Trabalho em Equipe</span>
+                        <span class="skill-tag">Pensamento Criativo</span>
+                        <span class="skill-tag">Resolução de Problemas</span>
+                        <span class="skill-tag">Metodologias Ágeis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTATO -->
+        <div id="contato" class="section">
+            <!-- PC - Layout completo com QR Code e todos os dados -->
+            <div class="hidden lg:grid grid-cols-2 gap-8">
+                <!-- Lado esquerdo: Informações de contato -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Vamos Conversar?</h2>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                                <span class="text-blue-600 dark:text-blue-400 text-xl">📍</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">Localização</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Recife/PE, Brasil</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                                <span class="text-green-600 dark:text-green-400 text-xl">📧</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">E-mail</h3>
+                                <a href="mailto:juliocesarqueiroz20080@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">juliocesarqueiroz20080@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+                                <span class="text-purple-600 dark:text-purple-400 text-xl">📱</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">WhatsApp</h3>
+                                <p class="text-gray-600 dark:text-gray-400">(81) 99804-7104</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="w-12 h-12 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                                <span class="text-gray-600 dark:text-gray-400 text-xl">💼</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">Redes Sociais</h3>
+                                <div class="flex gap-3 mt-2">
+                                    <a href="https://github.com/Jcjulio20060" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lado direito: QR Code e chamada -->
+                <div class="flex flex-col items-center justify-center text-white bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 p-8 rounded-2xl shadow-xl">
+                    <h2 class="text-2xl font-bold mb-4 text-center">Vamos criar algo juntos?</h2>
+                    <p class="mb-6 text-center text-blue-100">Aberto a colaborações, estágios e boas ideias 💡</p>
+                    <img src="assets/qr-linkedin.png" alt="QR Code LinkedIn" class="w-32 h-32 mb-6 border-4 border-white rounded-xl shadow-lg">
+                    <p class="text-sm text-center text-blue-100 mb-4">Escaneie para meu LinkedIn</p>
+                    <div class="flex gap-3">
+                        <a href="mailto:juliocesarqueiroz20080@gmail.com" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+                            📧 E-mail
+                        </a>
+                        <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors shadow-lg">
+                            💼 LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLET - Layout sem QR Code -->
+            <div class="hidden md:block lg:hidden bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+                <h2 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Vamos Conversar?</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                                <span class="text-blue-600 dark:text-blue-400">📍</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">Localização</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Recife/PE, Brasil</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                                <span class="text-green-600 dark:text-green-400">📧</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">E-mail</h3>
+                                <a href="mailto:juliocesarqueiroz20080@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">juliocesarqueiroz20080@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+                                <span class="text-purple-600 dark:text-purple-400">📱</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">WhatsApp</h3>
+                                <p class="text-gray-600 dark:text-gray-400">(81) 99804-7104</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="w-10 h-10 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                                <span class="text-gray-600 dark:text-gray-400">💼</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">Redes Sociais</h3>
+                                <div class="flex gap-3 mt-2">
+                                    <a href="https://github.com/Jcjulio20060" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Vamos criar algo juntos? 💡</p>
+                    <div class="flex justify-center gap-4">
+                        <a href="mailto:juliocesarqueiroz20080@gmail.com" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
+                            📧 Entrar em contato
+                        </a>
+                        <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors shadow-lg">
+                            💼 LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOBILE - Versão simplificada -->
+            <div class="block md:hidden">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Vamos Conversar?</h2>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="text-blue-600 dark:text-blue-400 text-lg">📍</span>
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-white">Recife/PE, Brasil</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="text-green-600 dark:text-green-400 text-lg">📧</span>
+                            <div>
+                                <a href="mailto:juliocesarqueiroz20080@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">juliocesarqueiroz20080@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="text-purple-600 dark:text-purple-400 text-lg">📱</span>
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-white">(81) 99804-7104</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="text-gray-600 dark:text-gray-400 text-lg">💼</span>
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-white mb-2">Redes Sociais</p>
+                                <div class="flex gap-4">
+                                    <a href="https://github.com/Jcjulio20060" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Vamos criar algo juntos? 🚀</p>
+                        <div class="flex flex-col gap-3">
+                            <a href="mailto:juliocesarqueiroz20080@gmail.com" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg text-center">
+                                📧 E-mail
+                            </a>
+                            <a href="https://linkedin.com/in/Jcjulio20060" target="_blank" class="border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors shadow-lg text-center">
+                                💼 LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <script>
-      // Alternância manual do modo claro/escuro
-      const btn = document.getElementById('toggle-theme');
-      const icon = document.getElementById('theme-icon');
-      btn.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-        if(document.documentElement.classList.contains('dark')) {
-          localStorage.theme = 'dark';
-          icon.textContent = '☀️';
-        } else {
-          localStorage.theme = 'light';
-          icon.textContent = '🌙';
+        // Initialize Dynamic Year
+        function initYear() {
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
         }
-      });
-      // Ajusta o ícone ao carregar
-      if(document.documentElement.classList.contains('dark')) {
-        icon.textContent = '☀️';
-      } else {
-        icon.textContent = '🌙';
-      }
 
-      // Lógica do menu mobile
-      const menuBtn = document.getElementById('menu-btn');
-      const menuIcon = document.getElementById('menu-icon');
-      const mobileMenu = document.getElementById('mobile-menu');
-      menuBtn.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.toggle('hidden');
-        // aria-expanded para acessibilidade
-        menuBtn.setAttribute('aria-expanded', String(!isHidden));
-        // troca ícone entre ☰ e ✕ 
-        menuIcon.textContent = isHidden ? '☰' : '✕';
-      });
-
-        const cards = document.querySelectorAll('.project-card');
-        const modal = document.getElementById('project-modal');
-        const backdrop = document.getElementById('modal-backdrop');
-        const closeBtn = document.getElementById('modal-close');
-        const titleEl = document.getElementById('modal-title');
-        const imgEl = document.getElementById('modal-image');
-        const descEl = document.getElementById('modal-desc');
-        const techEl = document.getElementById('modal-tech');
-        const repoLink = document.getElementById('modal-repo');
-        const demoLink = document.getElementById('modal-demo');
-
-        function openModal(data) {
-            titleEl.textContent = data.title;
-            imgEl.src = data.image;
-            imgEl.alt = data.title;
-            descEl.textContent = data.desc;
-            // tech badges
-            techEl.innerHTML = '';
-            data.tech.split(',').forEach(t => {
-            const span = document.createElement('span');
-            span.className = 'px-2 py-1 text-xs rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200';
-            span.textContent = t.trim();
-            techEl.appendChild(span);
-            });
-            repoLink.href = data.repo || '#';
-            if (data.demo) {
-            demoLink.href = data.demo;
-            demoLink.classList.remove('hidden');
+        // Toggle Theme Function
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('mobile-theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+                icon.textContent = '☀️';
             } else {
-            demoLink.classList.add('hidden');
+                localStorage.theme = 'light';
+                icon.textContent = '🌙';
             }
-
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            // focus
-            closeBtn.focus();
         }
 
-        function closeModal() {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        cards.forEach(card => {
-            function handler() {
-            openModal({
-                title: card.dataset.title,
-                desc: card.dataset.desc,
-                tech: card.dataset.tech || '',
-                image: card.dataset.image || '',
-                repo: card.dataset.repo || '',
-                demo: card.dataset.demo || ''
-            });
+        // Initialize on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            initYear();
+            // Set initial theme icon
+            const icon = document.getElementById('mobile-theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.textContent = '☀️';
+            } else {
+                icon.textContent = '🌙';
             }
-            card.addEventListener('click', handler);
-            card.addEventListener('keypress', (e) => { if (e.key === 'Enter') handler(); });
         });
 
-        closeBtn.addEventListener('click', closeModal);
-        backdrop.addEventListener('click', closeModal);
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+        function showSection(id) {
+            const isMobile = window.innerWidth <= 1024;
+            const targetSection = document.getElementById(id);
 
-        // Adicione isso ao seu script existente
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    // Fecha o menu mobile se estiver aberto
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                        menuIcon.textContent = '☰';
-                    }
+            if (isMobile) {
+                // Smooth scroll to section
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                // Desktop toggle logic
+                document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+                if (targetSection) {
+                    targetSection.classList.add("active");
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Highlighting sidebar links
+            document.querySelectorAll(".menu").forEach(m => m.classList.remove("active"));
+            const links = document.querySelectorAll(".menu");
+            links.forEach(link => {
+                const onclick = link.getAttribute('onclick');
+                if (onclick && onclick.includes(id)) {
+                    link.classList.add("active");
                 }
             });
-        });
 
-        // Animação do botão de código
-        const repoButtons = document.querySelectorAll('#modal-repo');
-        repoButtons.forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-            btn.style.width = `${btn.scrollWidth}px`;
-        });
-        
-        btn.addEventListener('mouseleave', () => {
-            btn.style.width = '40px';
-        });
+            // Close menu on mobile after selection
+            if (isMobile && document.body.classList.contains('menu-open')) {
+                toggleMenu();
+            }
+        }
+
+        // Toggle Accordion Function
+        function toggleAccordion(element) {
+            // Close other open accordions
+            document.querySelectorAll('.accordion-item').forEach(item => {
+                if (item !== element) {
+                    item.classList.remove('open');
+                }
+            });
+
+            // Toggle current
+            element.classList.toggle('open');
+        }
+
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            document.body.classList.toggle('menu-open');
+        }
+
+        // Add event listener to handle sidebar link highlights correctly when clicked
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('menu')) {
+                document.querySelectorAll(".menu").forEach(m => m.classList.remove("active"));
+                e.target.classList.add("active");
+            }
         });
     </script>
 </body>
