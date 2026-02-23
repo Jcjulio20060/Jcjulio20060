@@ -3,9 +3,9 @@
 ## Sobre Mim
 
 🎓 Estudante de **Ciências da Computação** | 💡 Apaixonado pelo mundo da **Tecnologia** | 🌎 Localizado em Recife - PE<br>
-📚 Atualmetne aprendendo **React Native**.<br>
+📚 Atualmente aprendendo **React Native** e **Tailwind CSS**.<br>
 🎯 Objetivos: Me tornar um programador FullStack Developer.<br>
-🎮 No tempo livre, gosto de estudar e jogar.
+🎮 No tempo livre, gosto de estudar, jogar e desenvolver projetos pessoais.
 <!--
 **Jcjulio20060/Jcjulio20060** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
@@ -28,6 +28,7 @@ Here are some ideas to get you started:
 <div style="display: inline_block"><br/>
   <img align="center" alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
   <img align="center" alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+  <img align="center" alt="TailwindCSS" src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/>
   <img align="center" alt="JavaScript" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"/>
   <img align="center" alt="TypeScript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/>
   <img align="center" alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
@@ -56,10 +57,11 @@ Here are some ideas to get you started:
 ---
 
 # 📂 **Projetos em Destaque**
-| 🚀 Projeto | Descrição | Tecnologia |
-|------|-----------|------------|
-| [📂 E-commerce](https://github.com/AndrezzaCoelho/Tropicalia_Flowers) | Plataforma de vendas online de produtos de floricultura. O projeto inclui páginas de produtos e carrinho de compras, demonstrando habilidades em design responsivo e lógica de interação com JavaScript no front-end. | `html`, `css`, `js` |
-| [📂 SerBank](https://github.com/Jcjulio20060/SerBank) | Aplicativo de banco para gerenciamento de contas. O projeto simula funcionalidades como login, transações e extrato bancário, aplicando lógica de negócios com TypeScript e componentes reutilizáveis com React Native. | `React`, `React Native`, `TypeScript` |
+| 🚀 Projeto | Descrição | Tecnologia | Link |
+|------|-----------|------------|------|
+| [🌐 Portfólio Web](https://github.com/Jcjulio20060/Jcjulio20060) | Portfólio pessoal responsivo com seções interativas, timeline profissional e modo escuro. | `HTML5`, `Tailwind CSS`, `JavaScript` | [🔗 Ver Projeto](https://Jcjulio20060.github.io) |
+| [📂 E-commerce](https://github.com/AndrezzaCoelho/Tropicalia_Flowers) | Plataforma de vendas online de produtos de floricultura. O projeto inclui páginas de produtos e carrinho de compras, demonstrando habilidades em design responsivo e lógica de interação com JavaScript no front-end. | `html`, `css`, `js` | [🔗 Ver Projeto](https://github.com/AndrezzaCoelho/Tropicalia_Flowers) |
+| [📂 SerBank](https://github.com/Jcjulio20060/SerBank) | Aplicativo de banco para gerenciamento de contas. O projeto simula funcionalidades como login, transações e extrato bancário, aplicando lógica de negócios com TypeScript e componentes reutilizáveis com React Native. | `React`, `React Native`, `TypeScript` | [🔗 Ver Projeto](https://github.com/Jcjulio20060/SerBank) |
 
 ---
 
@@ -69,6 +71,15 @@ Here are some ideas to get you started:
 <img src="https://github-readme-stats.vercel.app/api?username=Jcjulio20060&show_icons=true&theme=radical" height="180em" />
 <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Jcjulio20060&layout=compact&theme=radical" height="180em" />
 </p>  
+
+---
+
+## **🚀 Portfólio Online**
+<div align="center">
+  <a href="https://Jcjulio20060.github.io" target="_blank">
+    <img src="https://img.shields.io/badge/🌐_Portfólio_Online-1E40AF?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfólio Online"/>
+  </a>
+</div>
 
 ---
 
